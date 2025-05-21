@@ -65,9 +65,9 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(res => {
             if (res.success) {
                 confirmation.textContent = "Estimate sent to your email!";
-                form.reset();
-                calculateCost(); // Recalculate with cleared inputs
-                setTimeout(() => confirmation.textContent = "", 5000);
+                // form.reset();
+                // calculateCost(); // Recalculate with cleared inputs
+                // setTimeout(() => confirmation.textContent = "", 5000);
             }
         });
     });
