@@ -21,19 +21,33 @@
 }
 #wte-estimator-form label {
     font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: 1px;
 
+}
+#wte-estimator-form p.desc-text {
+    font-size: 14px;
+    text-transform: none;
+    font-weight: 100 !important;
+    line-height: 1.4;
 }
 
 #wte-estimator-form .consent-checkbox {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 12px;
+        height: auto;
+        line-height: 0;
+        margin: auto;
+        font-weight: 100;
+        text-transform: capitalize;
 }
 #wte-estimator-form .consent-checkbox input {
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
+width: 20px;
     cursor: pointer;
+    margin: 25px 13px 30px 0px;
 }
 #wte-estimator-form .consent-checkbox label {
     font-size: 14px;
@@ -50,5 +64,19 @@ width: 100%;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 2s ease;
+}
+#wte-estimator-form .wte-btn:hover {
+    background-color: #0056b3;
+    transition: all 2s ease;
+}
+@media screen and (max-width: 700px) {
+    #wte-estimator-form {
+        padding: 1em;
+        border: 1px solid #ddd;
+    }
+    #wte-estimator-form .wte-btn {
+        padding: 12px;
+    }
+    
 }

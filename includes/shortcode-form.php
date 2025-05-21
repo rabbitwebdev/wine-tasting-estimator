@@ -42,11 +42,11 @@ function wte_render_estimator_form() {
 
 <label for="wte-name">Full Name</label>
 <p class="desc-text">Please enter your full name.</p>
-<input type="text" id="wte-name" name="name" required>
+<input type="text" id="wte-name" placeholder="Full name" name="name" required>
 
         <label>Your email:
             <p class="desc-text">Please enter your email address.</p>
-            <input type="email" id="wte-email" required>
+            <input type="email" placeholder="Email"  id="wte-email" required>
         </label>
 
         <label class="consent-checkbox">
