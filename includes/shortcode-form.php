@@ -29,9 +29,9 @@ function wte_render_estimator_form() {
 <label for="wte-location">Event Location</label>
 <select id="wte-location" name="location" required>
   <option value="">-- Select Location --</option>
-  <option value="London">London</option>
-  <option value="Canary Wharf">Canary Wharf</option>
-  <option value="City">City of London</option>
+  <option value="london">London</option>
+  <option value="canary_wharf">Canary Wharf</option>
+  <option value="city">City of London</option>
   <option value="Kent">Kent</option>
 </select>
 

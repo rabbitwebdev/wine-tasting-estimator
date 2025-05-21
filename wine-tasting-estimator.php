@@ -47,6 +47,7 @@ function wte_render_lead_meta_box($post) {
     $fields = [
         'wte_name' => 'Full Name',
         'wte_email' => 'Email',
+        'wte_location' => 'Event Location',
         'wte_people' => 'Number of People',
         'wte_type' => 'Drink Type',
         'wte_drinks' => 'Number of Drinks',
