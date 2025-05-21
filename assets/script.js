@@ -35,7 +35,13 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Consent required!");
             return;
         }
+         const people = parseInt(peopleInput.value) || 0;
+    const drinks = parseInt(drinksInput.value) || 0;
+    const drinkType = typeInput.value;
 
+    const drinkRate = (drinkType === 'champagne') ? champagneRate : wineRate;
+        const total = (people * baseRate) + (drinks * drinkRate);
+        
         const data = new FormData();
         data.append('action', 'wte_save_estimate');
         data.append('people', peopleInput.value);
@@ -46,16 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
         data.append('email', emailInput.value);
         data.append('drink_type', typeInput.value); // ✅ send drink type
 
-         const people = parseInt(peopleInput.value) || 0;
-    const drinks = parseInt(drinksInput.value) || 0;
-    const drinkType = typeInput.value;
+        
 
-    const drinkRate = (drinkType === 'champagne') ? champagneRate : wineRate;
-    const total = (people * baseRate) + (drinks * drinkRate);
-
-    // Show calculated cost now
-    costDisplay.textContent = 'Estimated Cost: £' + total.toFixed(2);
-    costDisplay.style.display = 'block';
+   
 
         fetch(wte_ajax.ajax_url, {
             method: 'POST',
@@ -65,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(res => {
             if (res.success) {
                 confirmation.textContent = "Estimate sent to your email!";
+                 // Show calculated cost now
+    costDisplay.textContent = 'Estimated Cost: £' + total.toFixed(2);
+    costDisplay.style.display = 'block';
                 // form.reset();
                 // calculateCost(); // Recalculate with cleared inputs
                 // setTimeout(() => confirmation.textContent = "", 5000);
