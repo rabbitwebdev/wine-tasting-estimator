@@ -38,7 +38,7 @@ function wte_render_estimator_form() {
             I consent to being contacted.
         </label>
 
-        <button type="submit">Get Estimate</button>
+        <button class="wte-btn btn" type="submit">Get Estimate</button>
         <p id="wte-confirmation" style="color: green;"></p>
         <p><span id="wte-cost">£0.00</span></p>
     </form>
