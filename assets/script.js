@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const consentInput = form.querySelector('#wte-consent');
     const confirmation = form.querySelector('#wte-confirmation');
     const reasonInput = form.querySelector('#wte-reason');
-
+    const nameInput = form.querySelector('#wte-name');
     const baseRate = parseFloat(wte_ajax.base_rate);
     const wineRate = parseFloat(wte_ajax.wine_rate);
     const champagneRate = parseFloat(wte_ajax.champagne_rate);
@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data.append('type', typeInput.value);
         data.append('drinks', drinksInput.value);
         data.append('reason', reasonInput.value);
+        data.append('name', nameInput.value);
         data.append('email', emailInput.value);
         data.append('drink_type', typeInput.value); // ✅ send drink type
 

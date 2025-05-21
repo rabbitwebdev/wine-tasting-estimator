@@ -26,6 +26,8 @@ function wte_render_estimator_form() {
     <option value="other">Other</option>
 </select>
 
+<label for="wte-name">Full Name</label>
+<input type="text" id="wte-name" name="name" required>
 
         <label>Your email:
             <input type="email" id="wte-email" required>
