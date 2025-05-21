@@ -38,3 +38,29 @@ add_action('init', function () {
         'supports' => ['title'],
     ]);
 });
+
+add_action('add_meta_boxes', function () {
+    add_meta_box('wte_lead_details', 'Lead Details', 'wte_render_lead_meta_box', 'wte_lead', 'normal', 'default');
+});
+
+function wte_render_lead_meta_box($post) {
+    $fields = [
+        'wte_email' => 'Email',
+        'wte_people' => 'Number of People',
+        'wte_type' => 'Drink Type',
+        'wte_drinks' => 'Number of Drinks',
+        'wte_reason' => 'Reason for Tasting',
+        'wte_drink_type' => 'Drink Category',
+        'wte_total_cost' => 'Total Cost (£)',
+    ];
+
+    echo '<table class="form-table">';
+    foreach ($fields as $key => $label) {
+        $value = esc_html(get_post_meta($post->ID, $key, true));
+        echo "<tr>
+                <th scope='row'><label for='$key'>$label</label></th>
+                <td><input type='text' id='$key' name='$key' value='$value' class='regular-text' readonly></td>
+              </tr>";
+    }
+    echo '</table>';
+}
