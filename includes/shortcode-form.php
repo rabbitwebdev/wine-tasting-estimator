@@ -17,6 +17,16 @@ function wte_render_estimator_form() {
             <input type="number" id="wte-drinks" min="1" required>
         </label>
 
+        <label for="wte-reason">Event type:</label>
+<select id="wte-reason" name="reason" required>
+    <option value="">-- Select Reason --</option>
+    <option value="corporate_event">Corporate Event</option>
+    <option value="birthday">Birthday</option>
+    <option value="team_building">Team Building</option>
+    <option value="other">Other</option>
+</select>
+
+
         <label>Your email:
             <input type="email" id="wte-email" required>
         </label>

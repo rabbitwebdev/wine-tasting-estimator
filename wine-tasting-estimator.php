@@ -28,3 +28,13 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('wte-style', plugin_dir_url(__FILE__) . 'assets/style.css');
 });
 
+add_action('init', function () {
+    register_post_type('wte_lead', [
+        'label' => 'Wine Tasting Leads',
+        'public' => false,
+        'show_ui' => true,
+        'menu_position' => 20,
+        'menu_icon' => 'dashicons-groups',
+        'supports' => ['title'],
+    ]);
+});

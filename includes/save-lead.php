@@ -9,53 +9,36 @@ function wte_save_estimate() {
     $type = sanitize_text_field($_POST['type']);
     $drinks = intval($_POST['drinks']);
     $email = sanitize_email($_POST['email']);
+    $reason = sanitize_text_field($_POST['reason'] ?? '');
     $drink_type = sanitize_text_field($_POST['drink_type'] ?? 'wine');
 
     $base = floatval(get_option('wte_base_rate', 25));
-    $drink_rate = ($drink_type === 'champagne') 
+    $drink_rate = ($drink_type === 'champagne')
         ? floatval(get_option('wte_champagne_rate', 15))
         : floatval(get_option('wte_wine_rate', 10));
 
     $total = ($people * $base) + ($drinks * $drink_rate);
 
-    // Save to DB
-    global $wpdb;
-    $table = $wpdb->prefix . 'wte_leads';
-    $wpdb->insert($table, [
-        'email' => $email,
-        'people' => $people,
-        'type' => $type,
-        'drink_type' => $drink_type,
-        'drinks' => $drinks,
-        'total_cost' => $total,
-        'created_at' => current_time('mysql')
+    // Save as post
+    $post_id = wp_insert_post([
+        'post_type' => 'wte_lead',
+        'post_title' => 'Estimate from ' . $email . ' (' . date('Y-m-d H:i') . ')',
+        'post_status' => 'publish',
     ]);
 
-    // Send confirmation email
+    if ($post_id) {
+        update_post_meta($post_id, 'wte_email', $email);
+        update_post_meta($post_id, 'wte_people', $people);
+        update_post_meta($post_id, 'wte_type', $type);
+        update_post_meta($post_id, 'wte_drinks', $drinks);
+        update_post_meta($post_id, 'wte_reason', $reason);
+        update_post_meta($post_id, 'wte_drink_type', $drink_type);
+        update_post_meta($post_id, 'wte_total_cost', $total);
+    }
+
+    // Send email
     wp_mail($email, "Your Wine Tasting Estimate", "Thank you! Your estimated cost is £" . number_format($total, 2));
 
     echo json_encode(['success' => true]);
     wp_die();
 }
-
-// Create leads table on activation
-register_activation_hook(__FILE__, function () {
-    global $wpdb;
-    $table = $wpdb->prefix . 'wte_leads';
-    $charset = $wpdb->get_charset_collate();
-
-    $sql = "CREATE TABLE $table (
-        id INT NOT NULL AUTO_INCREMENT,
-        email VARCHAR(255),
-        people INT,
-        type VARCHAR(50),
-        drink_type VARCHAR(50),
-        drinks INT,
-        total_cost FLOAT,
-        created_at DATETIME,
-        PRIMARY KEY (id)
-    ) $charset;";
-
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($sql);
-});
