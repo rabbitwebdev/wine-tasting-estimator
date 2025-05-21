@@ -16,10 +16,10 @@ add_action('admin_init', function () {
       add_settings_section('wte_main', 'Main Settings', null, 'wte-settings');
 
        add_settings_field('wte_email_template', 'Email Template', function () {
-    $value = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} People, having {drinks} person.\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
+    $value = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} People, having {drinks} person.\nYour location: {location}\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
 
     echo "<textarea id='wte_email_template' name='wte_email_template' rows='6' cols='60'>" . esc_textarea($value) . "</textarea>";
-    echo "<p><small>Use placeholders: <code>{name}</code>, <code>{cost}</code>, <code>{type}</code>, <code>{people}</code>, <code>{drinks}</code>, <code>{reason}</code></small></p>";
+    echo "<p><small>Use placeholders: <code>{name}</code>, <code>{cost}</code>, <code>{type}</code>, <code>{people}</code>, <code>{drinks}</code>, <code>{reason}</code>, <code>{location}</code></small></p>";
     
     echo "<h4>Email Preview:</h4>";
     echo "<div id='wte_email_preview' style='white-space: pre-wrap; background: #f9f9f9; border: 1px solid #ccc; padding: 10px;'></div>";
@@ -37,7 +37,8 @@ add_action('admin_init', function () {
                 type: 'champagne',
                 people: '8',
                 drinks: '12',
-                reason: 'Corporate Event'
+                reason: 'Corporate Event',
+                location: 'London',
             };
 
             function updatePreview() {

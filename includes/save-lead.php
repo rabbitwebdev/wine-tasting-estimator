@@ -25,6 +25,7 @@ function wte_save_estimate() {
     $email = sanitize_email($_POST['email']);
     $reason = sanitize_text_field($_POST['reason'] ?? '');
     $drink_type = sanitize_text_field($_POST['drink_type'] ?? 'wine');
+    $location = sanitize_text_field($_POST['location'] ?? '');
 
     $base = floatval(get_option('wte_base_rate', 25));
     $drink_rate = ($drink_type === 'champagne')
@@ -47,12 +48,13 @@ function wte_save_estimate() {
         update_post_meta($post_id, 'wte_type', $type);
         update_post_meta($post_id, 'wte_drinks', $drinks);
         update_post_meta($post_id, 'wte_reason', $reason);
+        update_post_meta($post_id, 'wte_location', $location);
         update_post_meta($post_id, 'wte_drink_type', $drink_type);
         update_post_meta($post_id, 'wte_total_cost', $total);
     }
 
  // Get the email template or use default
-$template = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} people, having {drinks} drinks.\nReason for tasting: {reason}\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
+$template = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} people, having {drinks} drinks.\nReason for tasting: {reason}\nYour location: {location}\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
 
 // Prepare data for replacement
 $data = [
@@ -62,6 +64,7 @@ $data = [
     'people' => $people,
     'drinks' => $drinks,
     'reason' => $reason,
+     'location' => $location,
 ];
 
 // Replace placeholders with actual values

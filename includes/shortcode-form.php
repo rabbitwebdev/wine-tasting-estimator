@@ -26,6 +26,15 @@ function wte_render_estimator_form() {
     <option value="other">Other</option>
 </select>
 
+<label for="wte-location">Event Location</label>
+<select id="wte-location" name="location" required>
+  <option value="">-- Select Location --</option>
+  <option value="London">London</option>
+  <option value="Canary Wharf">Canary Wharf</option>
+  <option value="City">City of London</option>
+  <option value="Kent">Kent</option>
+</select>
+
 <label for="wte-name">Full Name</label>
 <input type="text" id="wte-name" name="name" required>
 
