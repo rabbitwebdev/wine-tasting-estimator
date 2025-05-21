@@ -17,6 +17,13 @@ add_shortcode('wine_tasting_estimator', 'wte_render_estimator_form');
 // Enqueue JS/CSS
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('wte-script', plugin_dir_url(__FILE__) . 'assets/script.js', [], false, true);
-    wp_localize_script('wte-script', 'wte_ajax', ['ajax_url' => admin_url('admin-ajax.php')]);
+
+    wp_localize_script('wte-script', 'wte_ajax', [
+        'ajax_url'    => admin_url('admin-ajax.php'),
+        'base_rate'   => get_option('wte_base_rate', 25),
+        'drink_rate'  => get_option('wte_drink_rate', 10),
+    ]);
+
     wp_enqueue_style('wte-style', plugin_dir_url(__FILE__) . 'assets/style.css');
 });
+

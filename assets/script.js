@@ -8,15 +8,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const consentInput = form.querySelector('#wte-consent');
     const confirmation = form.querySelector('#wte-confirmation');
 
-    function calculateCost() {
-        const people = parseInt(peopleInput.value) || 0;
-        const drinks = parseInt(drinksInput.value) || 0;
+   function calculateCost() {
+    const people = parseInt(peopleInput.value) || 0;
+    const drinks = parseInt(drinksInput.value) || 0;
 
-        const baseRate = 25;
-        const drinkRate = 10;
+    const baseRate = parseFloat(wte_ajax.base_rate);
+    const drinkRate = parseFloat(wte_ajax.drink_rate);
 
-        const total = (people * baseRate) + (drinks * drinkRate);
-        costDisplay.textContent = '£' + total.toFixed(2);
+    const total = (people * baseRate) + (drinks * drinkRate);
+    costDisplay.textContent = '£' + total.toFixed(2);
     }
 
     peopleInput.addEventListener('input', calculateCost);
