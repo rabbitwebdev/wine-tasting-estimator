@@ -32,7 +32,7 @@ function wte_render_estimator_form() {
   <option value="london">London</option>
   <option value="canary_wharf">Canary Wharf</option>
   <option value="city">City of London</option>
-  <option value="Kent">Kent</option>
+  <option value="kent">Kent</option>
 </select>
 
 <label for="wte-name">Full Name</label>

@@ -64,7 +64,7 @@ $data = [
     'people' => $people,
     'drinks' => $drinks,
     'reason' => $reason,
-     'location' => $location,
+    'location' => $location,
 ];
 
 // Replace placeholders with actual values
