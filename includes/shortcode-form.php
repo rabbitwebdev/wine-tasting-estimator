@@ -33,15 +33,14 @@ function wte_render_estimator_form() {
             <input type="email" id="wte-email" required>
         </label>
 
-        <label>
+        <label class="consent-checkbox">
             <input type="checkbox" id="wte-consent" required>
-            I consent to being contacted about this estimate.
+            I consent to being contacted.
         </label>
-
-        <p><span id="wte-cost">£0.00</span></p>
 
         <button type="submit">Get Estimate</button>
         <p id="wte-confirmation" style="color: green;"></p>
+        <p><span id="wte-cost">£0.00</span></p>
     </form>
     <?php
     return ob_get_clean();
