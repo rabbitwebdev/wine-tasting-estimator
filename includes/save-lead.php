@@ -39,9 +39,9 @@ function wte_save_estimate() {
     }
 
     // Get custom email template
-$template = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest. Your estimate is £{cost}.");
+$template = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} People, having {drinks} person.\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
 $body = str_replace(
-    ['{name}', '{cost}'],
+    ['{name}', '{cost}', '{type}', '{people}', '{drinks}', '{reason}'],
     [$name, number_format($total, 2)],
     $template
 );

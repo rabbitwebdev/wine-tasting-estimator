@@ -16,7 +16,7 @@ add_action('admin_init', function () {
       add_settings_section('wte_main', 'Main Settings', null, 'wte-settings');
 
        add_settings_field('wte_email_template', 'Email Template', function () {
-    $value = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event.\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
+    $value = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} People, having {drinks} person.\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
 
     echo "<textarea id='wte_email_template' name='wte_email_template' rows='6' cols='60'>" . esc_textarea($value) . "</textarea>";
     echo "<p><small>Use placeholders: <code>{name}</code>, <code>{cost}</code>, <code>{type}</code>, <code>{people}</code>, <code>{drinks}</code>, <code>{reason}</code></small></p>";
