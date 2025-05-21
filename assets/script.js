@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
         costDisplay.textContent = '£' + total.toFixed(2);
     }
 
-    peopleInput.addEventListener('input', calculateCost);
-    drinksInput.addEventListener('input', calculateCost);
-    typeInput.addEventListener('change', calculateCost);
+    // peopleInput.addEventListener('input', calculateCost);
+    // drinksInput.addEventListener('input', calculateCost);
+    // typeInput.addEventListener('change', calculateCost);
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -45,6 +45,17 @@ document.addEventListener('DOMContentLoaded', function () {
         data.append('name', nameInput.value);
         data.append('email', emailInput.value);
         data.append('drink_type', typeInput.value); // ✅ send drink type
+
+         const people = parseInt(peopleInput.value) || 0;
+    const drinks = parseInt(drinksInput.value) || 0;
+    const drinkType = typeInput.value;
+
+    const drinkRate = (drinkType === 'champagne') ? champagneRate : wineRate;
+    const total = (people * baseRate) + (drinks * drinkRate);
+
+    // Show calculated cost now
+    costDisplay.textContent = 'Estimated Cost: £' + total.toFixed(2);
+    costDisplay.style.display = 'block';
 
         fetch(wte_ajax.ajax_url, {
             method: 'POST',

@@ -13,3 +13,9 @@
     margin-bottom: 1em;
     padding: 0.5em;
 }
+
+#wte-cost {
+    display: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
