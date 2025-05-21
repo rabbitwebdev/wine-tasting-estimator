@@ -1,5 +1,18 @@
 <?php
 
+function wte_replace_placeholders($template, $data = []) {
+    $placeholders = [];
+    $replacements = [];
+
+    foreach ($data as $key => $value) {
+        $placeholders[] = '{' . $key . '}';
+        $replacements[] = $value;
+    }
+
+    return str_replace($placeholders, $replacements, $template);
+}
+
+
 // Handle AJAX estimate saving
 add_action('wp_ajax_wte_save_estimate', 'wte_save_estimate');
 add_action('wp_ajax_nopriv_wte_save_estimate', 'wte_save_estimate');
@@ -38,15 +51,23 @@ function wte_save_estimate() {
         update_post_meta($post_id, 'wte_total_cost', $total);
     }
 
-    // Get custom email template
-$template = get_option('wte_email_template', "Hi {name},\n\nThank you jnjnjnjn for your interest in our tasting event {type}.\nYou requested {people} People, having {drinks} person.\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
-$body = str_replace(
-    ['{name}', '{cost}', '{type}', '{people}', '{drinks}', '{reason}'],
-    [$name, number_format($total, 2)],
-    $template
-);
+ // Get the email template or use default
+$template = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} people, having {drinks} drinks.\nReason for tasting: {reason}\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
 
-// Send email
+// Prepare data for replacement
+$data = [
+    'name' => $name,
+    'cost' => number_format($total, 2),
+    'type' => $type,
+    'people' => $people,
+    'drinks' => $drinks,
+    'reason' => $reason,
+];
+
+// Replace placeholders with actual values
+$body = wte_replace_placeholders($template, $data);
+
+// Send the email
 wp_mail($email, "Your Wine Tasting Estimate", $body);
 
     
