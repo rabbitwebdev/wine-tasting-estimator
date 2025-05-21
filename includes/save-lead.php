@@ -55,7 +55,9 @@ function wte_save_estimate() {
 
  // Get the email template or use default
 $template = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} people, having {drinks} drinks.\nReason for tasting: {reason}\nYour location: {location}\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
-
+$subject = get_option('wte_email_subject', 'Your Wine Tasting Estimate');
+$from_name = get_option('wte_email_from_name', 'Wine Tasting Events');
+$from_email = get_option('wte_email_from_email', 'no-reply@yourdomain.com');
 // Prepare data for replacement
 $data = [
     'name' => $name,
@@ -71,7 +73,13 @@ $data = [
 $body = wte_replace_placeholders($template, $data);
 
 // Send the email
-wp_mail($email, "Your Wine Tasting Estimate", $body);
+$headers = [
+    'Content-Type: text/plain; charset=UTF-8',
+    "From: {$from_name} <{$from_email}>",
+    "Reply-To: {$from_email}",
+];
+
+wp_mail($email, $subject, $body, $headers);
 
     
 

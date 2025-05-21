@@ -14,6 +14,7 @@ add_action('admin_init', function () {
      register_setting('wte-settings-group', 'wte_email_template');
 
       add_settings_section('wte_main', 'Main Settings', null, 'wte-settings');
+      
 
        add_settings_field('wte_email_template', 'Email Template', function () {
     $value = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event {type}.\nYou requested {people} People, having {drinks} person.\nYour location: {location}\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
@@ -56,6 +57,46 @@ add_action('admin_init', function () {
     </script>
     <?php
 }, 'wte-settings', 'wte_main');
+
+add_settings_field(
+    'wte_email_subject',
+    'Email Subject',
+    function () {
+        $value = esc_attr(get_option('wte_email_subject', 'Your Wine Tasting Estimate'));
+        echo '<input type="text" name="wte_email_subject" value="' . $value . '" class="regular-text">';
+    },
+    'wte-settings',
+    'wte_main'
+);
+
+register_setting('wte-settings-group', 'wte_email_subject');
+
+// From Name
+add_settings_field(
+    'wte_email_from_name',
+    'Email From Name',
+    function () {
+        $value = esc_attr(get_option('wte_email_from_name', 'Wine Tasting Events'));
+        echo '<input type="text" name="wte_email_from_name" value="' . $value . '" class="regular-text">';
+    },
+    'wte-settings',
+    'wte_main'
+);
+register_setting('wte-settings-group', 'wte_email_from_name');
+
+// From Email
+add_settings_field(
+    'wte_email_from_email',
+    'Email From Address',
+    function () {
+        $value = esc_attr(get_option('wte_email_from_email', 'no-reply@yourdomain.com'));
+        echo '<input type="email" name="wte_email_from_email" value="' . $value . '" class="regular-text">';
+    },
+    'wte-settings',
+    'wte_main'
+);
+register_setting('wte-settings-group', 'wte_email_from_email');
+
 
     add_settings_section('wte_section', 'Pricing Settings', null, 'wte-settings');
 
