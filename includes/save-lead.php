@@ -38,8 +38,18 @@ function wte_save_estimate() {
         update_post_meta($post_id, 'wte_total_cost', $total);
     }
 
-    // Send email
-    wp_mail($email, "Your Wine Tasting Estimate", "Thank you! Your estimated cost is £" . number_format($total, 2));
+    // Get custom email template
+$template = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest. Your estimate is £{cost}.");
+$body = str_replace(
+    ['{name}', '{cost}'],
+    [$name, number_format($total, 2)],
+    $template
+);
+
+// Send email
+wp_mail($email, "Your Wine Tasting Estimate", $body);
+
+    
 
     echo json_encode(['success' => true]);
     wp_die();

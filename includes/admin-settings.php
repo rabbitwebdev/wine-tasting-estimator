@@ -11,8 +11,51 @@ add_action('admin_init', function () {
     register_setting('wte-settings-group', 'wte_drink_rate');
     register_setting('wte-settings-group', 'wte_wine_rate');
     register_setting('wte-settings-group', 'wte_champagne_rate');
+     register_setting('wte-settings-group', 'wte_email_template');
 
     add_settings_section('wte_section', 'Pricing Settings', null, 'wte-settings');
+
+    add_settings_field('wte_email_template', 'Email Template', function () {
+    $value = get_option('wte_email_template', "Hi {name},\n\nThank you for your interest in our tasting event.\nYour estimated cost is £{cost}.\n\nCheers,\nThe Team");
+
+    echo "<textarea id='wte_email_template' name='wte_email_template' rows='6' cols='60'>" . esc_textarea($value) . "</textarea>";
+    echo "<p><small>Use placeholders: <code>{name}</code>, <code>{cost}</code>, <code>{type}</code>, <code>{people}</code>, <code>{drinks}</code>, <code>{reason}</code></small></p>";
+    
+    echo "<h4>Email Preview:</h4>";
+    echo "<div id='wte_email_preview' style='white-space: pre-wrap; background: #f9f9f9; border: 1px solid #ccc; padding: 10px;'></div>";
+
+    // Add inline JS to update preview
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const textarea = document.getElementById('wte_email_template');
+            const preview = document.getElementById('wte_email_preview');
+
+            const sampleData = {
+                name: 'Sophie Sparkle',
+                cost: '150.00',
+                type: 'champagne',
+                people: '8',
+                drinks: '12',
+                reason: 'Corporate Event'
+            };
+
+            function updatePreview() {
+                let text = textarea.value;
+                for (const key in sampleData) {
+                    const regex = new RegExp('{' + key + '}', 'g');
+                    text = text.replace(regex, sampleData[key]);
+                }
+                preview.textContent = text;
+            }
+
+            textarea.addEventListener('input', updatePreview);
+            updatePreview();
+        });
+    </script>
+    <?php
+}, 'wte-settings', 'wte_main');
+
 
     add_settings_field('wte_base_rate', 'Base Rate per Person (£)', function () {
         $value = get_option('wte_base_rate', 25);
