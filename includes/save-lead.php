@@ -1,5 +1,6 @@
 <?php
 
+// Handle AJAX estimate saving
 add_action('wp_ajax_wte_save_estimate', 'wte_save_estimate');
 add_action('wp_ajax_nopriv_wte_save_estimate', 'wte_save_estimate');
 
@@ -8,11 +9,14 @@ function wte_save_estimate() {
     $type = sanitize_text_field($_POST['type']);
     $drinks = intval($_POST['drinks']);
     $email = sanitize_email($_POST['email']);
+    $drink_type = sanitize_text_field($_POST['drink_type'] ?? 'wine');
 
     $base = floatval(get_option('wte_base_rate', 25));
-    $drink = floatval(get_option('wte_drink_rate', 10));
+    $drink_rate = ($drink_type === 'champagne') 
+        ? floatval(get_option('wte_champagne_rate', 15))
+        : floatval(get_option('wte_wine_rate', 10));
 
-    $total = ($people * $base) + ($drinks * $drink);
+    $total = ($people * $base) + ($drinks * $drink_rate);
 
     // Save to DB
     global $wpdb;
@@ -21,19 +25,20 @@ function wte_save_estimate() {
         'email' => $email,
         'people' => $people,
         'type' => $type,
+        'drink_type' => $drink_type,
         'drinks' => $drinks,
         'total_cost' => $total,
         'created_at' => current_time('mysql')
     ]);
 
-    // Send email
+    // Send confirmation email
     wp_mail($email, "Your Wine Tasting Estimate", "Thank you! Your estimated cost is £" . number_format($total, 2));
 
     echo json_encode(['success' => true]);
     wp_die();
 }
 
-// DB Table
+// Create leads table on activation
 register_activation_hook(__FILE__, function () {
     global $wpdb;
     $table = $wpdb->prefix . 'wte_leads';
@@ -44,6 +49,7 @@ register_activation_hook(__FILE__, function () {
         email VARCHAR(255),
         people INT,
         type VARCHAR(50),
+        drink_type VARCHAR(50),
         drinks INT,
         total_cost FLOAT,
         created_at DATETIME,

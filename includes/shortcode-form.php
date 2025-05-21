@@ -7,12 +7,11 @@ function wte_render_estimator_form() {
             <input type="number" id="wte-people" min="1" required>
         </label>
 
-        <label>Type of drinks:
-            <select id="wte-type">
-                <option value="wine">Wine</option>
-                <option value="champagne">Champagne</option>
-            </select>
-        </label>
+       <label for="drinkType">Type of Drink:</label>
+<select id="drinkType" name="drink_type">
+    <option value="wine">Wine</option>
+    <option value="champagne">Champagne</option>
+</select>
 
         <label>Number of drinks to taste:
             <input type="number" id="wte-drinks" min="1" required>

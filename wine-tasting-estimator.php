@@ -20,8 +20,9 @@ add_action('wp_enqueue_scripts', function () {
 
     wp_localize_script('wte-script', 'wte_ajax', [
         'ajax_url'    => admin_url('admin-ajax.php'),
-        'base_rate'   => get_option('wte_base_rate', 25),
-        'drink_rate'  => get_option('wte_drink_rate', 10),
+        'base_rate'        => get_option('wte_base_rate', 25),
+    'wine_rate'        => get_option('wte_wine_rate', 10),
+    'champagne_rate'   => get_option('wte_champagne_rate', 15),
     ]);
 
     wp_enqueue_style('wte-style', plugin_dir_url(__FILE__) . 'assets/style.css');
