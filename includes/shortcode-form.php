@@ -38,6 +38,7 @@ function wte_render_estimator_form() {
   <option value="canary_wharf">Canary Wharf</option>
   <option value="city">City of London</option>
   <option value="kent">Kent</option>
+   <option value="other">Other</option>
 </select>
 
 <label for="wte-name">Full Name</label>
@@ -55,8 +56,9 @@ function wte_render_estimator_form() {
         </label>
 
         <button class="wte-btn btn" type="submit">Get Estimate</button>
+         <p><span id="wte-cost">£0.00</span></p>
         <p id="wte-confirmation" style="color: green;"></p>
-        <p><span id="wte-cost">£0.00</span></p>
+       
     </form>
     <?php
     return ob_get_clean();
