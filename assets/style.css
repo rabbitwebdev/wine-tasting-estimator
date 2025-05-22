@@ -27,6 +27,7 @@ font-size: 18px;
     text-transform: uppercase;
     font-weight: 800;
     letter-spacing: 1px;
+    display: block;
 
 }
 #wte-estimator-form p.desc-text {
