@@ -1,9 +1,17 @@
 <?php
 /**
  * Plugin Name: Wine Tasting Estimator
+ * Plugin URI: https://zapstart.digital/wine-tasting-estimator
  * Description: Estimate cost for a private wine/champagne tasting party, with lead capture and admin pricing options.
- * Version: 1.1
- * Author: Your Name
+ * Text Domain: wine-tasting-estimator
+ * Domain Path: /languages
+ * License: GPL2
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Requires at least: 5.0
+ * Requires PHP: 7.0
+ * Tested up to: 6.5
+ * Version: 1.2
+ * Author: P York
  */
 
 // Include core components
