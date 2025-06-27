@@ -129,6 +129,8 @@ register_setting('wte-settings-group', 'wte_email_from_email');
     register_setting('wte-settings-group', 'wte_button_text_color');
     register_setting('wte-settings-group', 'wte_border_radius');
     register_setting('wte-settings-group', 'wte_form_padding');
+    register_setting('wte-settings-group', 'wte_form_border_color');
+    register_setting('wte-settings-group', 'wte_form_border_width');
 
     add_settings_field('wte_form_bg', 'Form Background Color', 'wte_color_field_cb', 'wte-settings', 'wte_style_section', ['id' => 'wte_form_bg']);
     add_settings_field('wte_form_text', 'Text Color', 'wte_color_field_cb', 'wte-settings', 'wte_style_section', ['id' => 'wte_form_text']);
@@ -136,6 +138,8 @@ register_setting('wte-settings-group', 'wte_email_from_email');
     add_settings_field('wte_button_text_color', 'Button Text Color', 'wte_color_field_cb', 'wte-settings', 'wte_style_section', ['id' => 'wte_button_text_color']);
     add_settings_field('wte_border_radius', 'Form Border Radius (px)', 'wte_input_field_cb', 'wte-settings', 'wte_style_section', ['id' => 'wte_border_radius']);
     add_settings_field('wte_form_padding', 'Form Padding (px)', 'wte_input_field_cb', 'wte-settings', 'wte_style_section', ['id' => 'wte_form_padding']);
+    add_settings_field('wte_form_border_color', 'Form Border Color', 'wte_color_field_cb', 'wte-settings', 'wte_style_section', ['id' => 'wte_form_border_color']);
+    add_settings_field('wte_form_border_width', 'Form Border Width (px)', 'wte_input_field_cb', 'wte-settings', 'wte_style_section', ['id' => 'wte_form_border_width']);
 
     function wte_color_field_cb($args) {
         $value = esc_attr(get_option($args['id'], '#ffffff'));
