@@ -6,6 +6,7 @@ function wte_render_estimator_form() {
     $btn = esc_attr(get_option('wte_button_color', '#c0392b'));
     $btn_text = esc_attr(get_option('wte_button_text_color', '#fff'));
     $radius = intval(get_option('wte_border_radius', 4));
+    $padding = intval(get_option('wte_form_padding', 10));
 
     ob_start(); ?>
      <style>
@@ -13,6 +14,7 @@ function wte_render_estimator_form() {
         background-color: <?= $bg ?>;
         color: <?= $text ?>;
         border-radius: <?= $radius ?>px;
+        padding: <?= $padding ?>px;
     }
 
     #wte-estimator-form input,
