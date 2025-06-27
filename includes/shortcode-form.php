@@ -4,6 +4,7 @@ function wte_render_estimator_form() {
     $bg = esc_attr(get_option('wte_form_bg', '#f9f9f9'));
     $text = esc_attr(get_option('wte_form_text', '#333'));
     $btn = esc_attr(get_option('wte_button_color', '#c0392b'));
+    $btn_text = esc_attr(get_option('wte_button_text_color', '#fff'));
     $radius = intval(get_option('wte_border_radius', 4));
 
     ob_start(); ?>
@@ -21,11 +22,9 @@ function wte_render_estimator_form() {
         padding: 8px; */
     }
 
-    #wte-estimator-form button {
+    #wte-estimator-form button.wte-btn {
         background-color: <?= $btn ?>;
-        /* color: #fff;
-        border: none;
-        padding: 10px 15px; */
+        color: <?= $btn_text ?>;
         border-radius: <?= $radius ?>px;
         /* cursor: pointer; */
     }
