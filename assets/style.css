@@ -3,7 +3,7 @@
     margin: 1em auto;
     padding: 1em 2em;
     border: 2px solid #ddd;
-    border-radius: 12px;
+    /* border-radius: 12px; */
 }
 
 #wte-estimator-form input,

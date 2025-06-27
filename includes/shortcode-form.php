@@ -1,7 +1,39 @@
 <?php
 
 function wte_render_estimator_form() {
+    $bg = esc_attr(get_option('wte_form_bg', '#f9f9f9'));
+    $text = esc_attr(get_option('wte_form_text', '#333'));
+    $btn = esc_attr(get_option('wte_button_color', '#c0392b'));
+    $radius = intval(get_option('wte_border_radius', 4));
+
     ob_start(); ?>
+     <style>
+    #wte-estimator-form {
+        background-color: <?= $bg ?>;
+        color: <?= $text ?>;
+        border-radius: <?= $radius ?>px;
+    }
+
+    #wte-estimator-form input,
+    #wte-estimator-form select {
+        border-radius: <?= $radius ?>px;
+        /* margin-bottom: 10px;
+        padding: 8px; */
+    }
+
+    #wte-estimator-form button {
+        background-color: <?= $btn ?>;
+        /* color: #fff;
+        border: none;
+        padding: 10px 15px; */
+        border-radius: <?= $radius ?>px;
+        /* cursor: pointer; */
+    }
+
+    #wte-estimator-form button:hover {
+        opacity: 0.9;
+    }
+    </style>
     <form id="wte-estimator-form">
         <label>How many people?
             <p class="desc-text">Please enter the number of people attending the tasting event.</p>
